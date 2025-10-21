@@ -1,0 +1,241 @@
+/* Sayfanın tamamı için temel ayarlar */
+body {
+    font-family: Arial, sans-serif; /* Yazı tipi */
+    background-color: #f4f4f4;       /* Sayfanın arka plan rengi (hafif gri) */
+    padding: 20px;                   /* Sayfanın kenarlarından boşluk */
+}
+
+/* BÖLÜM 3: YAPRAK UYGULAMASI (TAB MENÜ) STİLLERİ
+*/
+
+/* Sekme menümüzü tutan ana kutu */
+.tabs-container {
+    width: 100%;
+    max-width: 900px; /* Menünün en fazla 900px genişlemesini sağlar */
+    margin: 20px auto;  /* Menüyü sayfada ortalar */
+    background-color: #ffffff; /* Beyaz arka plan */
+    border: 1px solid #ddd;    /* İnce bir çerçeve */
+}
+
+/* Sekmelerin olduğu liste ('Çok Satanlar' vb.) 
+  HTML'deki <ul class="tabs-menu"> etiketini stillendirir.
+*/
+.tabs-menu {
+    display: flex;             /* !!! En önemli kısım: Liste elemanlarını YAN YANA dizer. */
+    list-style-type: none;     /* Liste başındaki noktaları kaldırır. */
+    margin: 0;
+    padding: 0;
+    border-bottom: 2px solid #007bff; /* Menünün altına mavi bir çizgi ekler */
+}
+
+/* Listedeki her bir sekme 
+  HTML'deki <li> etiketlerini stillendirir.
+*/
+.tabs-menu li {
+    padding: 12px 18px;     /* Sekmelerin iç boşluğu (üst/alt - sağ/sol) */
+    cursor: pointer;          /* Üzerine gelince mouse'u el işareti yapar */
+    color: #555;             /* Yazı rengi (gri) */
+    font-weight: bold;      /* Yazıyı kalın yapar */
+    transition: all 0.2s ease; /* Renk değişimini yumuşak yapar */
+}
+
+/* Fare ile bir sekmenin üzerine gelindiğinde (hover)
+*/
+.tabs-menu li:hover {
+    background-color: #f0f0f0; /* Arka planı hafif gri yapar */
+    color: #000;             /* Yazıyı siyah yapar */
+}
+
+/* O an seçili olan sekme
+  HTML'deki <li class="active"> etiketini stillendirir.
+*/
+.tabs-menu li.active {
+    background-color: #007bff; /* Arka planı mavi yapar */
+    color: #ffffff;             /* Yazı rengini beyaz yapar */
+    border-bottom: 2px solid #007bff; /* Alttaki çizgiyle birleşmiş gibi görünür */
+}
+/* BÖLÜM 2: YAN MENÜ (KATEGORİLER) STİLLERİ
+*/
+
+/* Yan menüyü tutan ana kutu */
+.side-menu-container {
+    width: 280px; /* Menünün genişliği */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    /* Menüyü diğer içeriklerden ayırmak için sağa boşluk */
+    margin-right: 20px; 
+    /* float: left; sayesinde diğer içerikler sağına gelebilir */
+    float: left;
+}
+
+/* Ana kategori listesi */
+.category-menu {
+    list-style-type: none; /* Liste noktalarını kaldırır */
+    margin: 0;
+    padding: 0;
+}
+
+/* Ana kategori listesindeki her bir satır (<li>) */
+.category-menu li {
+    position: relative; /* Alt menüleri buna göre konumlandıracağız */
+    border-bottom: 1px solid #f0f0f0; /* Satırların arasına ince çizgi */
+}
+
+/* "Tüm Kategoriler" satırını farklılaştıralım */
+.category-menu li.all-categories {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+/* Kategori linkleri (<a>) */
+.category-menu li a {
+    display: block; /* Linkin tüm satırı kaplamasını sağlar */
+    padding: 10px 15px;
+    text-decoration: none; /* Link altı çizgisini kaldırır */
+    color: #333; /* Yazı rengi */
+    font-size: 14px;
+}
+
+/* Kategori linkinin üzerine gelince (hover) */
+.category-menu li:hover > a {
+    background-color: #f9f9f9;
+    color: #007bff; /* Yazı rengini mavi yapar */
+}
+
+/* Sağdaki '>' oku */
+.chevron {
+    position: absolute; /* li'ye göre konumlanır */
+    right: 15px;        /* Sağdan 15px boşluk */
+    top: 12px;          /* Üstten 12px boşluk */
+    color: #999;
+    font-size: 12px;
+}
+
+/* !!! EN ÖNEMLİ KISIM: ALT MENÜLER !!! */
+
+/* 1. Alt menüleri (submenu) normalde GİZLE */
+.submenu {
+    display: none;
+    position: absolute; /* Ana menüden bağımsız konumlanır */
+    left: 100%;       /* Ana menünün %100 SAĞINDA başlar */
+    top: 0;           /* Ana menü satırıyla aynı hizada başlar */
+    width: 200px;     /* Alt menü genişliği */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    /* Hafif bir gölge efekti */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1); 
+}
+
+/* 2. Ana menü satırının (li) üzerine gelindiğinde (hover)
+      onun içindeki alt menüyü (submenu) GÖSTER
+*/
+.category-menu li:hover > .submenu {
+    display: block;
+}
+
+/* Alt menü linkleri */
+.submenu li a {
+    color: #555;
+    font-size: 13px;
+}
+
+/* Alt menü linkinin üzerine gelince */
+.submenu li:hover > a {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+/* Not: "float: left" kullandığımız için sayfa düzeni bozulabilir.
+  Bunu düzeltmek için tab menümüzü de sağa alalım.
+*/
+.tabs-container {
+    /* float: left verdiğimiz için bu da sola yaslanır,
+       ama margin: 20px auto; kuralı onu ortalıyordu.
+       Bunu kaldırıp menülerin yan yana durmasını sağlıyoruz. */
+    margin: 0; 
+    
+    /* Bu, .side-menu-container'ın kapladığı alanın
+       dışında kalan alanı kaplamasını sağlar.
+       "overflow: hidden" sihirli bir düzelticidir. */
+    overflow: hidden;
+}
+/* BÖLUM 1: ÜST RESİM UYGULAMASI (GALERİ) STİLLERİ
+*/
+
+.gallery-container {
+    /* Bu kutu, ".tabs-container" içindeki alanın
+       tamamını kaplayacak */
+    width: 100%;
+    margin-bottom: 10px; /* Sekme menüsüyle arasına boşluk koyar */
+}
+
+.main-image-container {
+    position: relative; /* Banner'ı buna göre konumlandıracağız */
+    width: 100%;
+}
+
+/* Ana resim (büyük resim) */
+#main-image {
+    display: block; /* Resmin altındaki istenmeyen boşluğu kaldırır */
+    width: 100%;  /* İçinde olduğu kutuya tam sığar */
+    height: auto; /* Genişliğe göre boyutu otomatik ayarlar */
+    border: 1px solid #ddd;
+}
+
+/* "KARGO BEDAVA" banner'ı */
+.shipping-banner {
+    position: absolute; /* Ana resmin üzerine "yüzer" */
+    bottom: 20px;       /* Resmin altından 20px yukarıda */
+    right: 0;           /* Resmin sağına yaslı */
+    background-color: rgba(255, 165, 0, 0.9); /* Turuncu, hafif şeffaf */
+    padding: 10px 15px;
+    border-top-left-radius: 10px;    /* Sol üst köşeyi yuvarlar */
+    border-bottom-left-radius: 10px; /* Sol alt köşeyi yuvarlar */
+    color: white;
+}
+
+.shipping-banner span {
+    font-size: 14px;
+}
+.shipping-banner strong {
+    display: block; /* "KARGO BEDAVA" yazısını bir alt satıra alır */
+    font-size: 18px;
+}
+.shipping-banner a {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Küçük resimlerin (thumbnail) olduğu kutu */
+.thumbnail-container {
+    /* Küçük resimleri yan yana dizer */
+    display: flex; 
+    /* Eşit aralıklarla dağıtır */
+    justify-content: space-between; 
+    margin-top: 5px; /* Büyük resimle arasına boşluk koyar */
+}
+
+/* Küçük resimlerin (thumbnail) her biri */
+.thumbnail {
+    width: 19%; /* 5 resim sığması için (aralıklarla beraber) */
+    border: 2px solid #ddd;
+    cursor: pointer;
+    transition: border-color 0.2s; /* Çerçeve rengi değişimini yumuşatır */
+}
+
+/* Farenin üzerine gelinen küçük resim */
+.thumbnail:hover {
+    border-color: #007bff; /* Çerçeveyi mavi yapar */
+}
+
+/* O an seçili (aktif) olan küçük resim */
+.thumbnail.active {
+    border-color: #007bff;
+    /* Aktif olanı belirtmek için biraz daha belirgin yapalım */
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}

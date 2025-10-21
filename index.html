@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alışveriş Sitem</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="side-menu-container">
+        <ul class="category-menu">
+            <li>
+                <a href="#">Spor / Outdoor</a>
+                <span class="chevron">&gt;</span>
+                <ul class="submenu">
+                    <li><a href="#">Futbol</a></li>
+                    <li><a href="#">Basketbol</a></li>
+                    <li><a href="#">Koşu</a></li>
+                    <li><a href="#">Fitness</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#">Giyim / Ayakkabı</a>
+                <span class="chevron">&gt;</span>
+                <ul class="submenu">
+                    <li><a href="#">T-shirt</a></li>
+                    <li><a href="#">Pantolon</a></li>
+                    <li><a href="#">Spor Ayakkabı</a></li>
+                    <li><a href="#">Günlük Ayakkabı</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="#">Takı / Mücevher</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Saat / Gözlük / Aksesuar</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Kozmetik / Sağlık / Bakım</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Anne / Bebek / Oyuncak</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Kitap / Film / Müzik</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Hobi / Oyun Konsolu</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Kırtasiye / Ofis</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Oto Aks/Yapı Market/Bahçe</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Ev Dekorasyonu / Mobilya</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Pet Shop</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Süpermarket</a><span class="chevron">&gt;</span></li>
+            <li><a href="#">Kurumsal Satış</a><span class="chevron">&gt;</span></li>
+            
+            <li class="all-categories"><a href="#">Tüm Kategoriler</a></li> 
+        </ul>
+    </div>
+      <div class="gallery-container">
+        
+        <div class="main-image-container">
+            <img id="main-image" src="https://picsum.photos/id/21/600/280" alt="Büyük Ürün Resmi">
+            
+            <div class="shipping-banner">
+                <span>BURADA!</span>
+                <strong>KARGO BEDAVA</strong>
+                <a href="#">ALIŞVERİŞE BAŞLA &gt;</a>
+            </div>
+        </div>
+
+        <div class="thumbnail-container">
+            
+            <img class="thumbnail active" 
+                 src="https://picsum.photos/id/21/110/55" 
+                 alt="Küçük Resim 1"
+                 data-large-src="https://picsum.photos/id/21/600/280">
+            
+            <img class="thumbnail" 
+                 src="https://picsum.photos/id/119/110/55" 
+                 alt="Küçük Resim 2"
+                 data-large-src="https://picsum.photos/id/119/600/280">
+            
+            <img class="thumbnail" 
+                 src="https://picsum.photos/id/175/110/55" 
+                 alt="Küçük Resim 3"
+                 data-large-src="https://picsum.photos/id/175/600/280">
+            
+            <img class="thumbnail" 
+                 src="https://picsum.photos/id/1062/110/55" 
+                 alt="Küçük Resim 4"
+                 data-large-src="https://picsum.photos/id/1062/600/280">
+
+            <img class="thumbnail" 
+                 src="https://picsum.photos/id/0/110/55" 
+                 alt="Küçük Resim 5"
+                 data-large-src="https://picsum.photos/id/0/600/280">
+        </div>
+    </div>
+    </div>
+    </div>  
+    <script>
+        // Sayfadaki tüm HTML'in yüklenmesini bekle
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // 1. Gerekli HTML elemanlarını bulup değişkenlere ata
+            const mainImage = document.getElementById("main-image");
+            
+            // "thumbnail" class'ına sahip TÜM küçük resimleri bul (bir liste olarak)
+            const thumbnails = document.querySelectorAll(".thumbnail");
+
+            // 2. Her bir küçük resim için bir olay dinleyici ayarla
+            thumbnails.forEach(function(thumbnail) {
+                
+                // Fare bu küçük resmin üzerine geldiğinde (mouseover)
+                // 'changeImage' fonksiyonunu çalıştır.
+                thumbnail.addEventListener("mouseover", changeImage);
+            });
+
+            // 3. Resim değiştirme fonksiyonu
+            function changeImage(event) {
+                
+                // 'event.target', farenin üzerine geldiği küçük resimdir.
+                const clickedThumbnail = event.target;
+                
+                // O küçük resmin "data-large-src" özelliğinden
+                // büyük resim linkini oku.
+                const newImageSource = clickedThumbnail.getAttribute("data-large-src");
+                
+                // Büyük resmin "src" (kaynak) özelliğini
+                // bu yeni link ile değiştir.
+                mainImage.src = newImageSource;
+
+                // 4. Aktif class'ını yönet (Bonus)
+                // Önce tüm resimlerden 'active' class'ını kaldır
+                thumbnails.forEach(function(thumb) {
+                    thumb.classList.remove("active");
+                });
+                
+                // Sadece üzerine gelinen bu resme 'active' class'ını ekle
+                clickedThumbnail.classList.add("active");
+            }
+            
+        });
+    </script>
+</body>
+</html>
